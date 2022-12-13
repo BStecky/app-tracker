@@ -1,0 +1,28 @@
+{
+    "applications": [
+        {
+            "company": "amazon",
+            "app_link": "amazon.com",
+            "application_date": 1670891347.556897,
+            "received_response": null,
+            "received_interview": null,
+            "received_offer": null
+        },
+        {
+            "company": "google",
+            "app_link": "google.com",
+            "application_date": 1670891441.606865,
+            "received_response": null,
+            "received_interview": null,
+            "received_offer": null
+        },
+        {
+            "company": "apple",
+            "app_link": "apple.com",
+            "application_date": 1670896269.3423228,
+            "received_response": null,
+            "received_interview": null,
+            "received_offer": null
+        }
+    ]
+}

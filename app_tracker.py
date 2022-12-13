@@ -1,4 +1,5 @@
 import pickle
+import json
 import time
 from datetime import datetime
 
@@ -17,7 +18,7 @@ class Application:
         self.received_offer = None
 
     def show(self):
-        print("\n", "----------------------------------")
+        print("\n", "----------------------------------" + "\n")
         print("Company Name: ", self.company, "\n")
         print("Application Link: ", self.app_link, "\n")
         print("Application Date: ", datetime.fromtimestamp(self.application_date), "\n")
@@ -26,6 +27,18 @@ class Application:
         print("Received Offer: ", self.received_offer, "\n")
         print("----------------------------------")
 
+    def encoder(self):
+        return {'company' : self.company, 'app_link' : self.app_link, 'application_date' : self.application_date,
+        'received_response' : self.received_response, 'received_interview' : self.received_interview, 'received_offer' : self.received_offer}
+
+    def write_json(self):
+        encoded = self.encoder()
+        with open ('applications.json', 'r+') as file:
+            file_data = json.load(file)
+            print(file_data)
+            file_data["applications"].append(encoded)
+            file.seek(0)
+            json.dump(file_data, file, indent=4)
 
 while(True):
     response = input("Add a new application(1), view application history (2), or quit (3)? ")
@@ -38,15 +51,13 @@ while(True):
         new_app.show()
         response = input("Does this look okay? (y) or (n)")
         if response == 'y':
-            with open("applications.txt", "wb") as file:
-                pickle.dump(new_app, file)
+            new_app.write_json()
         else:
             continue
     elif response == '2':
-        pickle_off = open("applications.txt", "rb")
-        data = pickle.load(pickle_off)
-        print("data: ", vars(data))
-            
+        with open('applications.json', 'r') as file:
+            json_object = json.load(file)
+            print(json_object)
     elif response == '3':
         print('quit')
         break
